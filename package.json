@@ -1,0 +1,18 @@
+{
+  "name": "momo-express-test",
+  "version": "0.1.0",
+  "description": "API nhỏ để thử giao dịch MoMo từ frontend tĩnh trước khi deploy lên Vercel",
+  "main": "server.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.0",
+    "dotenv": "^16.5.1",
+    "express": "^4.18.2",
+    "cors": "^2.8.5"
+  }
+}
