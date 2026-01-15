@@ -27,24 +27,32 @@ if (missingKeys.length) {
 }
 
 const app = express();
+const defaultOrigins = [
+  'http://localhost:19006',
+  'http://localhost:19000',
+  'https://phe-la-web-delta.vercel.app'
+];
 const allowedOrigins = (
-  process.env.ALLOWED_ORIGINS ||
-  'http://localhost:19006,http://localhost:19000,https://phe-la-web.delta.vercel.app'
+  process.env.ALLOWED_ORIGINS || defaultOrigins.join(',')
 )
   .split(',')
   .map((origin) => origin.trim())
   .filter(Boolean);
 
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
-      return callback(new Error('Origin không được phép'));
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
     }
-  })
-);
+    return callback(new Error('Origin không được phép'));
+  },
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  optionsSuccessStatus: 204
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
