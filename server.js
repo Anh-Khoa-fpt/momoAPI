@@ -27,11 +27,13 @@ if (missingKeys.length) {
 }
 
 const app = express();
-const allowedOrigins =
-  (process.env.ALLOWED_ORIGINS || 'http://localhost:19006,http://localhost:19000')
-    .split(',')
-    .map((origin) => origin.trim())
-    .filter(Boolean);
+const allowedOrigins = (
+  process.env.ALLOWED_ORIGINS ||
+  'http://localhost:19006,http://localhost:19000,https://phe-la-web.delta.vercel.app'
+)
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
 
 app.use(
   cors({
