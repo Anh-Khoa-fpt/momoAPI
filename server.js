@@ -135,12 +135,19 @@ app.post('/api/momo/create-payment', async (req, res) => {
       }
     });
 
+    console.log('create-payment response', response.data);
     res.status(response.status).json(response.data);
   } catch (error) {
-    console.error('Loi khi tao payment:', error.message);
     if (error.response) {
+      console.error(
+        'Loi khi tao payment:',
+        error.response.status,
+        error.response.data
+      );
       return res.status(error.response.status).json(error.response.data);
     }
+
+    console.error('Loi khi tao payment:', error.message);
     res.status(500).json({ error: error.message });
   }
 });
