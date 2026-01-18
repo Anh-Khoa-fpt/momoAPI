@@ -30,7 +30,8 @@ const app = express();
 const defaultOrigins = [
   'http://localhost:19006',
   'http://localhost:19000',
-  'https://phe-la-web-delta.vercel.app'
+  'https://phe-la-web-delta.vercel.app',
+  'https://matte-matcha-teabar.vercel.app'
 ];
 const allowedOrigins = (
   process.env.ALLOWED_ORIGINS || defaultOrigins.join(',')
